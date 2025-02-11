@@ -61,18 +61,43 @@ public class StringLL{
         StringNode pointer = front;
         StringNode prev = null; // prev pointer one node behind pointer
         while(pointer != null && !pointer.item.equals(data)){
-            prev = pointer;
-            pointer = pointer.next;
+            prev = pointer; // update prev
+            pointer = pointer.next; // move pointer ahead
         }
 
-        // either we walked out of the list OR
+        // either we walked out of the list (didn't find item) OR
         // pointer points to the node to be deleted
         
-        
-        return null;
+        if (pointer == null){
+            // data is not in list
+            return null;
+        }
+        else{
+            prev.next = pointer.next;
+            return pointer.item;
+        }
     }
 
-    public void addAfter(String item){
+    public void addAfter(String item, String target){
+        StringNode pointer = front;
+        
+        while (pointer != null && !pointer.item.equals(target)){
+            pointer = pointer.next; // move pointer ahead
+        }
+
+        // found target?
+        if (pointer == null){
+            // target not found
+            return;
+        }
+        else{
+            StringNode n = new StringNode();
+            n.item = item;
+            n.next = pointer.next;
+
+            // update the node referred to by pointer to point to new node
+            pointer.next = n;
+        }
 
     }
 
@@ -86,7 +111,13 @@ public class StringLL{
         list.traverse();
         System.out.println("Deleted: " + list.removeFront());
         list.traverse();
+        list.addToFront("lime");
+        list.addToFront("mango");
+        list.addToFront("tomato");
+        list.traverse();
         list.remove("pear");
+        list.traverse();
+        list.addAfter("pineapple", "mango");
         list.traverse();
 
 

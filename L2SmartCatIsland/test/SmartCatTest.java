@@ -45,30 +45,40 @@ public class SmartCatTest {
             {"W", "L", "W", "L", "L", "L", "W", "W", "L", "W"},
             {"W", "L", "L", "W", "L", "L", "W", "L", "L", "W"},
             {"L", "W", "L", "W", "L", "L", "W", "L", "W", "W"},
-            {"L", "W", "L", "L", "W", "L", "W", "L", "W", "W"},
-            {"L", "W", "W", "L", "W", "L", "W", "L", "W", "W"},
-            {"W", "L", "L", "L", "W", "L", "W", "L", "W", "W"},
-            {"W", "L", "W", "W", "W", "W", "L", "L", "W", "W"},
-            {"W", "L", "L", "L", "L", "L", "L", "W", "L", "L"},
-            {"W", "W", "W", "W", "W", "W", "W", "W", "L", "L"}
+            {"L", "W", "L", "L", "W", "W", "L", "L", "W", "L"},
+            {"L", "W", "W", "L", "W", "W", "L", "W", "W", "L"},
+            {"W", "L", "L", "L", "W", "W", "L", "W", "L", "L"},
+            {"W", "L", "W", "W", "W", "W", "L", "W", "L", "L"},
+            {"W", "L", "W", "L", "L", "L", "L", "W", "L", "L"},
+            {"W", "L", "L", "L", "W", "W", "W", "W", "L", "L"}
     });
 
     @Test
     public void testWalkPath() {
-        // WRITE YOUR CODE HERE
-
+        SmartCat yilin = new SmartCat("yilin", SmartCatTest.pathIsland, 0, 0, Color.WHITE);
+        yilin.walkPath();
+        assertEquals(7, yilin.getCol());
+        assertEquals(0, yilin.getRow());
     }
 
     @Test
     public void testCollectAllYarn() {
-        // WRITE YOUR CODE HERE
-
+        SmartCat yilin = new SmartCat("yilin", SmartCatTest.yarnIsland, 0, 0, Color.ORANGE);
+        yilin.collectAllYarn();
+        Tile[][] island = yarnIsland.getTiles();
+        for (int i = 0; i < 9; i++){
+            for (int j = 0; j < 9; j++){
+                assertFalse(island[i][j].hasYarn);
+            }
+        }
     }
 
     @Test
     public void testSolveMaze() {
-        // WRITE YOUR CODE HERE
-
+        SmartCat yilin = new SmartCat("yilin", SmartCatTest.mazeIsland, 0, 0, Color.ORANGE);
+        yilin.solveMaze();
+        assertEquals(9, yilin.getCol());
+        assertEquals(0, yilin.getRow());
+        assertTrue(yilin.numStepsTaken() >= 30);
     }
-
 }
