@@ -1,5 +1,6 @@
 public class RefresherObjectsReferences {
     
+    @SuppressWarnings("unused")
     public static void main(String[] args) {
         
         // primitive variables (primitive data types)
