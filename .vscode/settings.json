@@ -1,6 +1,7 @@
 {
     "java.project.sourcePaths": [
-        "Class/src"
+        "Class/src",
+        "Recitations/src"
     ],
     "java.project.referencedLibraries": [
         "/Users/deannayi/Documents/CS112/Class/lib/algs4.jar"
