@@ -105,6 +105,7 @@ public class Driver {
         }
     }
 
+    @SuppressWarnings("unused")
     public static void main(String args[]) {
         ThemeParkQueue queue = new ThemeParkQueue();
         SwingUtilities.invokeLater(new Runnable() {

@@ -49,14 +49,14 @@ public class ThemeParkQueue {
      * @param toAdd String value to enqueue in a Rider node
      */
     public void enqueue(String toAdd) {
-        if (frontOfLine == null || endOfLine == null){
+        if (frontOfLine == null || endOfLine == null){ // if line is empty
             Rider newRider = new Rider();
             newRider.name = toAdd;
             frontOfLine = newRider;
             endOfLine = newRider;
             lineLength++;
         }
-        else{
+        else{ // else line is not empty
             Rider newRider = new Rider();
             newRider.name = toAdd;
             endOfLine.next = newRider;
@@ -82,9 +82,15 @@ public class ThemeParkQueue {
      * @return Rider which was at the front of the queue
      */
     public String dequeue() {
-        // WRITE YOUR CODE HERE
-
-        return null; // Remove this line, it is provided so the code compiles
+        if (frontOfLine == null  || endOfLine == null){ // if line is empty
+            return null; // nothing to return
+        }
+        else{ // else line is not empty
+            String temp = frontOfLine.name;
+            frontOfLine = frontOfLine.next;
+            lineLength--;
+            return temp;
+        }
     }
 
     /*

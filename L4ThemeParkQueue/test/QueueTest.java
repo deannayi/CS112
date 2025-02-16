@@ -18,12 +18,22 @@ public class QueueTest {
     @Test
     public void testEnqueue() {
         ThemeParkQueue test = new ThemeParkQueue();
-        fail("Not fully implemented yet! Add code to finish this test, then remove this line.");
+        for (int i = 0; i < 20; i++){
+            test.enqueue("rider" + i);
+        }
+        assertEquals("rider0", test.getFront().name);
+        assertEquals(20, test.getLineLength());
+        test.enqueue("rider21");
+        assertEquals(21, test.getLineLength());
     }
 
     @Test
     public void testDequeue() {
         ThemeParkQueue test = new ThemeParkQueue();
-        fail("Not fully implemented yet! Add code to finish this test, then remove this line.");
+        test.enqueue("rider1");
+        test.enqueue("rider2");
+        assertEquals("rider1", test.dequeue());
+        assertEquals("rider2", test.getFront().name);
+        assertTrue(test.getLineLength() == 1);
     }
 }
