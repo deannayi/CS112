@@ -15,9 +15,12 @@ public class LinkedTrainCarsTest {
 
     @Test
     public void testNumCars() {
-        // WRITE YOUR CODE HERE
         LinkedTrainCars test = new LinkedTrainCars();
-
+        test.insertAt("car1", 0);
+        test.insertAt("car2", 1);
+        assertTrue(test.numCars() == 2);
+        test.insertAt("car3", 1);
+        assertTrue(test.numCars() == 3);
     }
 
     @Test

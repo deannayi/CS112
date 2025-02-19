@@ -39,7 +39,28 @@ public class LinkedTrainCars {
      * @param index The index to add the node at
      */
     public void insertAt(String add, int index) {
-        // WRITE YOUR CODE HERE
+        TrainCar n = new TrainCar();
+        n.name = add;
+        int currentIndex = 1;
+        if (front == null){
+            front = n;
+        }
+        else{
+            if (index <= 1){
+                n.next = front;
+                front = n;
+                return;
+            }
+            TrainCar ptr = front;
+            TrainCar prev = front;
+            while (ptr != null && currentIndex != index){
+                prev = ptr;
+                ptr = ptr.next;
+                currentIndex++;
+            }
+            n.next = ptr;
+            prev.next = n;
+        }
 
     }
 

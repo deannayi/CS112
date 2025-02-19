@@ -23,6 +23,7 @@ public class Driver {
     private LinkedTrainCars cars;
     private static String[] possibleCars = { "Engine", "Coal", "Passenger", "Flat", "Box", "Tank", };
 
+    @SuppressWarnings("unused")
     public Driver() {
 
         JFrame display = new JFrame("Linked Train List Lab");
@@ -169,6 +170,7 @@ public class Driver {
         
     }
 
+    @SuppressWarnings("unused")
     public static void main(String args[]) {
         LinkedTrainCars list = new LinkedTrainCars();
         SwingUtilities.invokeLater(new Runnable() {
