@@ -25,9 +25,13 @@ public class LinkedTrainCarsTest {
 
     @Test
     public void testInsertAt() {
-        // WRITE YOUR CODE HERE
         LinkedTrainCars test = new LinkedTrainCars();
-
+        test.insertAt("car1", 0);
+        test.insertAt("car2", 0);
+        assertTrue(test.getFront().name == "car2");
+        assertTrue(test.getFront().getNext().name == "car1");
+        test.insertAt("car3", 4);
+        assertTrue(test.getFront().getNext().getNext().name == "car3");
     }
 
 }
