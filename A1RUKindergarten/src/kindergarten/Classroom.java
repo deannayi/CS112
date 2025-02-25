@@ -61,7 +61,18 @@ public class Classroom {
      * @param filename the student input file
      */
     public void enterClassroom(String filename) {
-        // WRITE YOUR CODE HERE
+        StdIn.setFile(filename);
+        int numStudents = StdIn.readInt();
+        for (int i = 0; i < numStudents; i++){
+            String firstName = StdIn.readString();
+            String lastName = StdIn.readString();
+            int height = StdIn.readInt();
+
+            Student newStudent = new Student(firstName, lastName, height);
+            SNode newNode = new SNode(newStudent, studentsInLine);
+            studentsInLine = newNode;
+        }
+
     }
 
     /**
