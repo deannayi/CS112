@@ -97,8 +97,16 @@ public class Classroom {
      * @param openSeatsFile the seating chart input file
      */
     public void createSeats(String openSeatsFile) {
-        // WRITE YOUR CODE HERE
-
+        StdIn.setFile(openSeatsFile);
+        int rows = StdIn.readInt();
+        int cols = StdIn.readInt();
+        openSeats = new boolean[rows][cols];
+        studentsInSeats = new Student[rows][cols];
+        for (int row = 0; row < rows; row++){
+            for (int col = 0; col < cols; col++){
+                openSeats[row][col] = StdIn.readBoolean();
+            }
+        }
     }
 
     /**
