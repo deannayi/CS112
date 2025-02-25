@@ -7,6 +7,7 @@
 public class LinkedList <T> {
     
     // Node class only visible in LinkedList class (no other class can use it)
+    @SuppressWarnings("hiding")
     private class Node <T> {
         T item; // data
         Node <T> next; // link to next node

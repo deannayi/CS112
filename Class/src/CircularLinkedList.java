@@ -3,6 +3,7 @@
 // Data type is plugged in during compilation time
 public class CircularLinkedList<T> {
     
+    @SuppressWarnings("hiding")
     private class Node<T> {
         private T item;
         private Node<T> next;
