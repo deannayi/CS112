@@ -125,8 +125,14 @@ public class Classroom {
      * by seatMusicalChairsWinner().
      */
     public void seatStudents() {
-        // WRITE YOUR CODE HERE
-
+        for (int row = 0; row < openSeats.length; row++){
+            for (int col = 0; col < openSeats[row].length; col++){
+                if (studentsInLine != null && openSeats[row][col] == true && studentsInSeats[row][col] != studentsInLine.getStudent()){
+                    studentsInSeats[row][col] = studentsInLine.getStudent();
+                    studentsInLine = studentsInLine.getNext();
+                }
+            }
+        }
     }
 
     /**
