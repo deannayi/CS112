@@ -75,6 +75,24 @@ public class DoublyLinkedList<T> {
     public void print() {
 
     }
+
+    public void reverseDLL(){
+        if (front == null){
+            return;
+        }
+        DLLNode<T> ptr = front;
+        DLLNode<T> prev = null;
+        while (ptr != null){
+            DLLNode<T> tempPrev = ptr.prev;
+            ptr.prev = ptr.next;
+            ptr.next = tempPrev;
+            ptr = ptr.prev;
+            
+            prev = ptr;
+            ptr = tempPrev;
+        }
+        front = prev;
+    }
     
     // client code to test
     public static void main (String[] args) {

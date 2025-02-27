@@ -142,8 +142,25 @@ public class Classroom {
      * NOTE: musicalChairs refers to the LAST student in the CLL.
      */
     public void insertMusicalChairs() {
-        // WRITE YOUR CODE HERE
-
+        for (int row = 0; row < studentsInSeats.length; row++){
+            for (int col = 0; col < studentsInSeats[row].length; col++){
+                Student student = studentsInSeats[row][col];
+                if (musicalChairs == null){
+                    musicalChairs = new SNode();
+                    musicalChairs.setStudent(student);
+                    musicalChairs.setNext(musicalChairs);
+                    studentsInSeats[row][col] = null;
+                }
+                else if (studentsInSeats[row][col] != null){
+                    SNode newNode = new SNode();
+                    newNode.setStudent(student);
+                    newNode.setNext(musicalChairs.getNext());
+                    musicalChairs.setNext(newNode);
+                    musicalChairs = newNode;
+                    studentsInSeats[row][col] = null;
+                }
+            }
+        }
     }
 
     /**
