@@ -70,8 +70,14 @@ public class BSTDictionary {
      * 4) Add curr to the ArrayList
      */
     private void postOrderHelper(WordNode curr, ArrayList<WordNode> list) {
-        // WRITE YOUR CODE HERE
-
+        if (curr == null){
+            return;
+        }
+        else{
+            postOrderHelper(curr.getLeft(), list);
+            postOrderHelper(curr.getRight(), list);
+            list.add(curr);
+        }
     }
 
     /**
