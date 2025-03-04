@@ -83,7 +83,7 @@ public class BSTDictionary {
     /**
      * This method is provided for you, do not edit it.
      * 
-     * This will call your recursive postOrder() method, give it an ArrayList of
+     * This will call your recursive inOrder() method, give it an ArrayList of
      * WordNodes, and then return that list. Your recursive method should fill
      * this list with WordNodes, ordered via in-order.
      * 
@@ -97,7 +97,7 @@ public class BSTDictionary {
     }
 
     /**
-     * This is a recursive helper method for post-order traversal.
+     * This is a recursive helper method for in-order traversal.
      * 
      * You should:
      * 1) return if the curr WordNode is null
@@ -106,7 +106,14 @@ public class BSTDictionary {
      * 4) Recursively call this method on curr's right child
      */
     private void inOrderHelper(WordNode curr, ArrayList<WordNode> list) {
-        // WRITE YOUR CODE HERE
+        if (curr == null){
+            return;
+        }
+        else{
+            inOrderHelper(curr.getLeft(), list);
+            list.add(curr);
+            inOrderHelper(curr.getRight(), list);
+        }
 
     }
 
