@@ -33,8 +33,14 @@ public class BSTDictionary {
      * 4) Recursively call this method on curr's right child
      */
     private void preOrderHelper(WordNode curr, ArrayList<WordNode> list) {
-        // WRITE YOUR CODE HERE
-
+        if (curr == null){
+            return;
+        }
+        else{
+            list.add(curr);
+            preOrderHelper(curr.getLeft(), list);
+            preOrderHelper(curr.getRight(), list);
+        }
     }
 
     /**
