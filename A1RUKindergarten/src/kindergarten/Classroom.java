@@ -183,8 +183,19 @@ public class Classroom {
      *             in the musicalChairs. 0 is the first student
      */
     public void moveStudentFromChairsToLine(int size) {
-        // WRITE YOUR CODE HERE
-
+        int indexToRemove = StdRandom.uniform(size);
+        SNode ptr = musicalChairs.getNext();
+        SNode prev = musicalChairs;
+        if (indexToRemove == 0){
+            musicalChairs.setNext(musicalChairs.getNext().getNext());
+        }
+        for (int i = 0; i < indexToRemove; i++){
+            prev = ptr;
+            ptr = ptr.getNext();
+        }
+        Student toRemove = ptr.getStudent();
+        prev.setNext(ptr.getNext());
+        insertByName(toRemove);
     }
 
     /**
@@ -198,7 +209,23 @@ public class Classroom {
      * @param eliminatedStudent the student eliminated from chairs to insert
      */
     public void insertByName(Student eliminatedStudent) {
-        // WRITE YOUR CODE HERE
+        if (studentsInLine == null){
+            studentsInLine = new SNode(eliminatedStudent,null);
+            return;
+        }
+        SNode ptr = studentsInLine;
+        SNode prev = null;
+        while (ptr != null && ptr.getStudent().compareNameTo(eliminatedStudent) <= 0){
+            prev = ptr;
+            ptr = ptr.getNext();
+        }
+        if (prev == null){
+            studentsInLine = new SNode(eliminatedStudent, studentsInLine);
+        }
+        else{
+            SNode newNode = new SNode(eliminatedStudent, ptr);
+            prev.setNext(newNode);
+        }
     }
 
     /**
