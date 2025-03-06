@@ -145,20 +145,18 @@ public class Classroom {
         for (int row = 0; row < studentsInSeats.length; row++){
             for (int col = 0; col < studentsInSeats[row].length; col++){
                 Student student = studentsInSeats[row][col];
-                if (musicalChairs == null){
-                    musicalChairs = new SNode();
-                    musicalChairs.setStudent(student);
-                    musicalChairs.setNext(musicalChairs);
-                    studentsInSeats[row][col] = null;
+                if (student != null){
+                    if (musicalChairs == null){
+                        musicalChairs = new SNode(student, null);
+                        musicalChairs.setNext(musicalChairs);
+                    }
+                    else{
+                        SNode newNode = new SNode(student, musicalChairs.getNext());
+                        musicalChairs.setNext(newNode);
+                        musicalChairs = newNode;
+                    }
                 }
-                else if (studentsInSeats[row][col] != null){
-                    SNode newNode = new SNode();
-                    newNode.setStudent(student);
-                    newNode.setNext(musicalChairs.getNext());
-                    musicalChairs.setNext(newNode);
-                    musicalChairs = newNode;
-                    studentsInSeats[row][col] = null;
-                }
+                student = null;
             }
         }
     }
@@ -186,16 +184,15 @@ public class Classroom {
         int indexToRemove = StdRandom.uniform(size);
         SNode ptr = musicalChairs.getNext();
         SNode prev = musicalChairs;
-        if (indexToRemove == 0){
-            musicalChairs.setNext(musicalChairs.getNext().getNext());
-        }
-        for (int i = 0; i < indexToRemove; i++){
-            prev = ptr;
+        for (int i = 0; i != indexToRemove; i++){
+            prev = prev.getNext();
             ptr = ptr.getNext();
         }
-        Student toRemove = ptr.getStudent();
         prev.setNext(ptr.getNext());
-        insertByName(toRemove);
+        if (ptr == musicalChairs){
+            musicalChairs = prev;
+        }
+        insertByName(ptr.getStudent());
     }
 
     /**
@@ -214,16 +211,20 @@ public class Classroom {
             return;
         }
         SNode ptr = studentsInLine;
-        SNode prev = null;
+        SNode prev = studentsInLine;
         while (ptr != null && ptr.getStudent().compareNameTo(eliminatedStudent) <= 0){
             prev = ptr;
             ptr = ptr.getNext();
+            if (ptr == null) {
+                break;
+            }
         }
+        SNode newNode = new SNode(eliminatedStudent, ptr);
         if (prev == null){
-            studentsInLine = new SNode(eliminatedStudent, studentsInLine);
+            studentsInLine = newNode;
+            return;
         }
         else{
-            SNode newNode = new SNode(eliminatedStudent, ptr);
             prev.setNext(newNode);
         }
     }
@@ -243,8 +244,19 @@ public class Classroom {
      * --> pass the size from step (1) into the method call.
      */
     public void eliminateLosingStudents() {
-        // WRITE YOUR CODE HERE
-
+        SNode ptr = musicalChairs;
+        int size = 0;
+        while(true){
+            size++;
+            ptr = ptr.getNext();
+            if (ptr == musicalChairs){
+                break;
+            }
+        }
+        while (size > 1){
+            moveStudentFromChairsToLine(size);
+            size--;
+        }
     }
 
     /*
@@ -260,8 +272,20 @@ public class Classroom {
      * OR if musicalChairs is empty.
      */
     public void seatMusicalChairsWinner() {
-        // WRITE YOUR CODE HERE
-
+        if (musicalChairs == musicalChairs.getNext()){
+            for (int row = 0; row < studentsInSeats.length; row++){
+                for (int col = 0; col < studentsInSeats[row].length; col++){
+                    if (studentsInSeats[row][col] != null){
+                        continue;
+                    }
+                    else if (openSeats[row][col] == true){
+                        studentsInSeats[row][col] = musicalChairs.getStudent();
+                        musicalChairs = null;
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     /**
