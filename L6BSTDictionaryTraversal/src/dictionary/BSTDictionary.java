@@ -134,9 +134,23 @@ public class BSTDictionary {
      * @return arraylist containing WordNodes of this tree, ordered via level-order
      */
     public ArrayList<WordNode> levelOrder() {
-        // WRITE YOUR CODE HERE
-
-        return null; // Replace this line, it's provided so the code compiles
+        if (root == null){
+            return null;
+        }
+        ArrayList<WordNode> list = new ArrayList<>();
+        Queue<WordNode> queue = new Queue<>();
+        queue.enqueue(root);
+        while(!queue.isEmpty()){
+            WordNode currentNode = queue.dequeue();
+            list.add(currentNode);
+            if (currentNode.getLeft() != null){
+                queue.enqueue(currentNode.getLeft());
+            }
+            if (currentNode.getRight() != null){
+                queue.enqueue(currentNode.getRight());
+            }
+        }
+        return list;
     }
 
     /**
