@@ -9,7 +9,7 @@ package kindergarten;
  */
 public class SNode {
     private Student student; // the data part of the node
-    private SNode   next;    // a link to the next student int the linked list
+    private SNode   next;    // a link to the next student in the linked list
 
     public SNode ( Student s, SNode n ) {
 		student = s;

@@ -61,7 +61,18 @@ public class Classroom {
      * @param filename the student input file
      */
     public void enterClassroom(String filename) {
-        // WRITE YOUR CODE HERE
+        StdIn.setFile(filename);
+        int numStudents = StdIn.readInt();
+        for (int i = 0; i < numStudents; i++){
+            String firstName = StdIn.readString();
+            String lastName = StdIn.readString();
+            int height = StdIn.readInt();
+
+            Student newStudent = new Student(firstName, lastName, height);
+            SNode newNode = new SNode(newStudent, studentsInLine);
+            studentsInLine = newNode;
+        }
+
     }
 
     /**
@@ -86,8 +97,16 @@ public class Classroom {
      * @param openSeatsFile the seating chart input file
      */
     public void createSeats(String openSeatsFile) {
-        // WRITE YOUR CODE HERE
-
+        StdIn.setFile(openSeatsFile);
+        int rows = StdIn.readInt();
+        int cols = StdIn.readInt();
+        openSeats = new boolean[rows][cols];
+        studentsInSeats = new Student[rows][cols];
+        for (int row = 0; row < rows; row++){
+            for (int col = 0; col < cols; col++){
+                openSeats[row][col] = StdIn.readBoolean();
+            }
+        }
     }
 
     /**
@@ -106,8 +125,14 @@ public class Classroom {
      * by seatMusicalChairsWinner().
      */
     public void seatStudents() {
-        // WRITE YOUR CODE HERE
-
+        for (int row = 0; row < openSeats.length; row++){
+            for (int col = 0; col < openSeats[row].length; col++){
+                if (studentsInLine != null && openSeats[row][col] == true && studentsInSeats[row][col] != studentsInLine.getStudent()){
+                    studentsInSeats[row][col] = studentsInLine.getStudent();
+                    studentsInLine = studentsInLine.getNext();
+                }
+            }
+        }
     }
 
     /**
@@ -117,8 +142,25 @@ public class Classroom {
      * NOTE: musicalChairs refers to the LAST student in the CLL.
      */
     public void insertMusicalChairs() {
-        // WRITE YOUR CODE HERE
-
+        for (int row = 0; row < studentsInSeats.length; row++){
+            for (int col = 0; col < studentsInSeats[row].length; col++){
+                Student student = studentsInSeats[row][col];
+                if (musicalChairs == null){
+                    musicalChairs = new SNode();
+                    musicalChairs.setStudent(student);
+                    musicalChairs.setNext(musicalChairs);
+                    studentsInSeats[row][col] = null;
+                }
+                else if (studentsInSeats[row][col] != null){
+                    SNode newNode = new SNode();
+                    newNode.setStudent(student);
+                    newNode.setNext(musicalChairs.getNext());
+                    musicalChairs.setNext(newNode);
+                    musicalChairs = newNode;
+                    studentsInSeats[row][col] = null;
+                }
+            }
+        }
     }
 
     /**
